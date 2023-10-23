@@ -58,16 +58,17 @@ class Server:
             - data: the dataset page (equivalent to return from previous task)
             - next_page: number of the next page, None if no next page
             - prev_page: number of the previous page, None if no previous page
-            - total_pages: the total number of pages in the dataset as an integer
+            - total_pages: the total number of pages in the dataset as an
+            integer
         """
         page_with_data = self.get_page(page, page_size)
-        len_of_dataset = len(self.dataset())
+        dataset_len = len(self.dataset())
         hyper_data_dict = {
             'page_size': len(page_with_data),
             'page': page,
             'data': page_with_data,
-            'next_page': page + 1 if len_of_dataset > page * page_size else None,
+            'next_page': page + 1 if dataset_len > page * page_size else None,
             'prev_page': page - 1 if page > 1 else None,
-            'total_pages': math.ceil(len_of_dataset / page_size)
+            'total_pages': math.ceil(dataset_len / page_size)
         }
         return hyper_data_dict

@@ -49,7 +49,7 @@ class Server:
         if start_index < 0 or end_index > len(self.dataset()):
             return []
         return self.dataset()[start_index:end_index]
-    
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
         Returns a dictionary of:

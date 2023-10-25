@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """LRU caching"""
-from collections import deque
 from base_caching import BaseCaching
 
 
@@ -13,7 +12,7 @@ class LRUCache(BaseCaching):
         self.lru = []
     
     def evict(self):
-        """Evict the leaset recently used item in the cache (LRU)."""
+        """Evict the least recently used item in the cache (LRU)."""
         if self.lru and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             lru = self.lru.pop()
             print(f"DISCARD: {lru}")
@@ -26,5 +25,7 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """Get the associated value of key."""
-        self.lru.remove(key) if key in self.lru else self.lru.append(key)
+        if key in self.lru:
+            self.lru.remove(key)
+        self.lru.append(key)
         return self.cache_data.get(key)

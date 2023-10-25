@@ -21,13 +21,19 @@ class LFUCache(BaseCaching):
     def put(self, key, item):
         """Add an item in the cache."""
         if key is not None and item is not None:
+            if self.lfu.get(key):
+                self.lfu[key] += 1
+            else:
+                self.lfu[key] = 1
             self.evict()
             self.cache_data[key] = item
 
     def get(self, key):
         """Get the associated value of key."""
-        if key in self.lfu.keys():
-            self.lfu[key] = 1
-        else:
-            self.lfu[key] += 1
-        return self.cache_data.get(key)
+        value = self.cache_data.get(key)
+        if value:
+            if self.lfu.get(key):
+                self.lfu[key] += 1
+            else:
+                self.lfu[key] = 1
+        return value

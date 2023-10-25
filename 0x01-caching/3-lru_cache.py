@@ -26,7 +26,9 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """Get the associated value of key."""
-        if key in self.lru:
-            self.lru.remove(key)
-        self.lru.append(key)
-        return self.cache_data.get(key)
+        value = self.cache_data.get(key)
+        if value:
+            if key in self.lru:
+                self.lru.remove(key)
+            self.lru.append(key)
+        return value

@@ -15,6 +15,7 @@ class MRUCache(BaseCaching):
         """Evict the most recently used item in the cache (MRU)."""
         if self.mru and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             mru = self.mru.pop()
+            del self.cache_data[mru]
             print(f"DISCARD: {mru}")
 
     def put(self, key, item):

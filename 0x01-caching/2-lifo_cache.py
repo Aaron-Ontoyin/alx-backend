@@ -16,8 +16,8 @@ class LIFOCache(BaseCaching):
         """Evict the last item in the cache (LIFO)."""
         if self.queue and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             first_in = self.queue.pop()
-            print(f"DISCARD: {first_in}")
             del self.cache_data[first_in]
+            print(f"DISCARD: {first_in}")
 
     def put(self, key, item):
         """Add an item in the cache."""

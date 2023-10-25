@@ -14,7 +14,7 @@ class LRUCache(BaseCaching):
     def evict(self):
         """Evict the least recently used item in the cache (LRU)."""
         if self.lru and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            lru = self.lru.pop()
+            lru = self.lru.pop(0)
             print(f"DISCARD: {lru}")
 
     def put(self, key, item):

@@ -5,15 +5,15 @@ from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """FIFO caching class"""
+    """LIFO caching class"""
 
     def __init__(self):
-        """Initialize the FIFO cache."""
+        """Initialize the LIFO cache."""
         super().__init__()
         self.queue = deque()
     
     def evict(self):
-        """Evict the first item in the cache (FIFO)."""
+        """Evict the last item in the cache (LIFO)."""
         if self.queue and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             first_in = self.queue.pop()
             print(f"DISCARD: {first_in}")

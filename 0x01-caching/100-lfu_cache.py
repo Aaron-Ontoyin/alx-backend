@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """LFU Caching"""
-from base_caching import BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class MRUCache(BaseCaching):

@@ -10,7 +10,7 @@ class LRUCache(BaseCaching):
         """Initialize the MRU cache."""
         super().__init__()
         self.mru = []
-    
+
     def evict(self):
         """Evict the most recently used item in the cache (MRU)."""
         if self.mru and len(self.cache_data) >= BaseCaching.MAX_ITEMS:

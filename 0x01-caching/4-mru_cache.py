@@ -23,9 +23,10 @@ class MRUCache(BaseCaching):
         if key is not None and item is not None:
             if key in self.mru:
                 self.mru.remove(key)
-            self.mru.append(key)
-            self.evict()
+            if key not in self.cache_data:
+                self.evict()
             self.cache_data[key] = item
+            self.mru.append(key)
 
     def get(self, key):
         """Get the associated value of key."""

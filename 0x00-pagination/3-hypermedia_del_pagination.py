@@ -32,25 +32,33 @@ class Server:
         if self.__indexed_dataset is None:
             dataset = self.dataset()
             truncated_dataset = dataset[:1000]
-            self.__indexed_dataset = {i: dataset[i] for i in range(len(dataset))}
+            self.__indexed_dataset = {
+                    i: dataset[i] for i in range(len(dataset))
+            }
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
         Returns a dictionary of:
-            - index: the current start index of the return page. That is the
-                index of the first item in the current page. For example if
-                requesting page 3 with page_size 20, and no data was removed
-                from the dataset, the current index should be 60.
-            - next_index: the next index to query with. That should be the index
-                of the first item after the last item on the current page.
+            - index: the current start index of the return page.
+            That is the index of the first item in the current page.
+            For example if requesting page 3 with page_size 20,
+            and no data was removed from the dataset,
+            the current index should be 60.
+            - next_index: the next index to query with. That should
+            be the index of the first item after the last item on
+            the current page.
             - page_size: the current page size
             - data: the actual page of the dataset
         """
-        assert type(index) is int and index >= 0 and index < len(self.dataset())
+        assert type(index) is int
+        assert index >= 0 and index < len(self.dataset())
         data_dict = {
             "index": index,
-            "data": [self.indexed_dataset()[i] for i in range(index, index + page_size)],
+            "data": [
+                self.indexed_dataset()[i]
+                for i in range(index, index + page_size)
+                ],
             "page_size": page_size,
             "next_index": index + page_size
         }

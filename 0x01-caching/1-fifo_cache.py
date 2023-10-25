@@ -26,7 +26,6 @@ class FIFOCache(BaseCaching):
             # self.cache_data[key] = item
             # self.queue[key] = 1
 
-
     def get(self, key):
         """Get the associated value of key"""
         return self.cache_data.get(key)

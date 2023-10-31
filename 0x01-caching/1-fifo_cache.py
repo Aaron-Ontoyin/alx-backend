@@ -3,6 +3,7 @@
 from collections import deque
 from base_caching import BaseCaching
 
+
 class FIFOCache(BaseCaching):
     """FIFO caching class"""
 
@@ -10,7 +11,7 @@ class FIFOCache(BaseCaching):
         """Initialize the FIFO cache."""
         super().__init__()
         self.queue = deque()
-    
+
     def evict(self):
         """Evict the first item in the cache (FIFO)."""
         if self.queue and len(self.cache_data) >= BaseCaching.MAX_ITEMS:

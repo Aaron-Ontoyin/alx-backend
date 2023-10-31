@@ -11,7 +11,7 @@ class LIFOCache(BaseCaching):
         """Initialize the LIFO cache."""
         super().__init__()
         self.queue = deque()
-    
+
     def evict(self):
         """Evict the last item in the cache (LIFO)."""
         if self.queue and len(self.cache_data) >= BaseCaching.MAX_ITEMS:

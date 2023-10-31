@@ -21,12 +21,18 @@ class MRUCache(BaseCaching):
     def put(self, key, item):
         """Add an item in the cache."""
         if key is not None and item is not None:
-            self.evict()
+            if key in self.mru:
+                self.mru.remove(key)
+            if key not in self.cache_data:
+                self.evict()
             self.cache_data[key] = item
+            self.mru.append(key)
 
     def get(self, key):
         """Get the associated value of key."""
-        if key in self.mru:
-            self.mru.remove(key)
-        self.mru.append(key)
-        return self.cache_data.get(key)
+        value = self.cache_data.get(key)
+        if value:
+            if key in self.mru:
+                self.mru.remove(key)
+            self.mru.append(key)
+        return value
